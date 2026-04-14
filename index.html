@@ -21,8 +21,8 @@
   --shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-weight: 400; letter-spacing: -0.01em; }
-body { min-height: 100vh; padding: 0; }
+html, body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-weight: 400; letter-spacing: -0.01em; overflow-x: hidden; }
+body { min-height: 100vh; padding: 0; width: 100%; max-width: 100%; }
 
 /* Top bar */
 .topbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: var(--panel); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
@@ -161,28 +161,44 @@ footer { padding: 40px; text-align: center; color: var(--muted); font-size: 12px
 
 /* Tablet / small-laptop */
 @media (max-width: 900px) {
-  .topbar { padding: 14px 20px; flex-wrap: wrap; gap: 10px; }
+  /* Topbar becomes two stacked rows: brand on top, nav slider below */
+  .topbar {
+    padding: 0;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: stretch;
+  }
+  .brand { padding: 12px 20px; width: 100%; }
+
+  /* Separated horizontal slider for the tabs */
   .topbar nav {
-    flex-wrap: nowrap;
-    gap: 4px;
     width: 100%;
-    justify-content: flex-start;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 8px 20px;
+    background: var(--panel-2);
+    border-top: 1px solid var(--border);
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
-    touch-action: pan-x;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    scroll-snap-type: x proximity;
-    /* Edge fade hint that content scrolls horizontally */
-    -webkit-mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
-            mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
   }
-  .topbar nav::-webkit-scrollbar { display: none; }
-  .topbar nav a { padding: 6px 10px; font-size: 12px; white-space: nowrap; flex: 0 0 auto; scroll-snap-align: start; }
+  .topbar nav::-webkit-scrollbar { display: none; width: 0; height: 0; }
+  .topbar nav a {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    font-size: 12px;
+    white-space: nowrap;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+  }
+
   .hero { padding: 20px; gap: 16px; }
-  .hero-img { min-height: 280px; }
+  .hero-img { min-height: 240px; }
   .hero-overlay { padding: 18px 20px; }
   .hero-overlay .addr { font-size: 22px; }
   .section { padding: 14px 20px 28px; }
@@ -194,12 +210,13 @@ footer { padding: 40px; text-align: center; color: var(--muted); font-size: 12px
 
 /* Mobile phones */
 @media (max-width: 600px) {
-  .topbar { padding: 12px 14px; }
+  .topbar { padding: 0; }
+  .brand { padding: 10px 14px; }
   .brand img { height: 30px; }
   .brand-text .firm { font-size: 12px; }
   .brand-text .subtitle { font-size: 10px; }
-  .topbar nav { gap: 2px; }
-  .topbar nav a { padding: 6px 8px; font-size: 11px; }
+  .topbar nav { gap: 6px; padding: 8px 14px; }
+  .topbar nav a { padding: 7px 12px; font-size: 12px; }
 
   .hero { padding: 14px; gap: 12px; }
   .hero-img { min-height: 200px; border-radius: 10px; }

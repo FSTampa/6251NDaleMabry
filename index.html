@@ -159,8 +159,25 @@ footer { padding: 40px; text-align: center; color: var(--muted); font-size: 12px
 /* Tablet / small-laptop */
 @media (max-width: 900px) {
   .topbar { padding: 14px 20px; flex-wrap: wrap; gap: 10px; }
-  .topbar nav { flex-wrap: wrap; gap: 4px; width: 100%; justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .topbar nav a { padding: 6px 10px; font-size: 12px; white-space: nowrap; }
+  .topbar nav {
+    flex-wrap: nowrap;
+    gap: 4px;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x proximity;
+    /* Edge fade hint that content scrolls horizontally */
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
+            mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
+  }
+  .topbar nav::-webkit-scrollbar { display: none; }
+  .topbar nav a { padding: 6px 10px; font-size: 12px; white-space: nowrap; flex: 0 0 auto; scroll-snap-align: start; }
   .hero { padding: 20px; gap: 16px; }
   .hero-img { min-height: 280px; }
   .hero-overlay { padding: 18px 20px; }

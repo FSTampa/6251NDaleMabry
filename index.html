@@ -73,6 +73,9 @@ body { min-height: 100vh; padding: 0; }
 .input-unit input[type="number"]:focus, .input-unit input[type="text"]:focus { outline: none; }
 .input-unit .unit { padding: 8px 10px; font-size: 12px; color: var(--muted); background: var(--panel-2); white-space: nowrap; border-left: 1px solid var(--border); }
 .input-unit:focus-within { outline: 1px solid var(--accent); }
+.input-unit.locked { opacity: 0.75; }
+.input-unit.locked:focus-within { outline: none; }
+.input-unit.locked input[readonly] { cursor: not-allowed; color: var(--muted); }
 .divider { border-top: 1px solid var(--border); margin: 18px 0; }
 .reset-btn { width: 100%; background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 10px; border-radius: 6px; cursor: pointer; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; transition: all 0.2s; font-family: inherit; }
 .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -320,7 +323,7 @@ footer { padding: 40px; text-align: center; color: var(--muted); font-size: 12px
 
       <div class="input-group">
         <label>Building Size</label>
-        <div class="input-unit"><input type="number" id="sf" value="7500" step="1"><span class="unit">SF</span></div>
+        <div class="input-unit locked"><input type="number" id="sf" value="7500" step="1" readonly aria-readonly="true" tabindex="-1"><span class="unit">SF</span></div>
       </div>
 
       <div class="input-group">
